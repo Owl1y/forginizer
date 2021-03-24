@@ -36,14 +36,14 @@ public class MyFrame extends JFrame{
   // Frame.setVisible(true);                              //This just makes sure the GUI is visible
    Frame.setIconImage(geneTree.getImage());             //this is what puts the photo in the corner of the GUI
    Frame.getContentPane().setBackground(new Color(150, 200, 181));//150, 200, 181[also the color of the GUI]
-   Frame.add(title);                                    //trying to add text onto the GUI
-   title.setForeground(new Color(0, 0, 0));             //color font
+  // Frame.add(title);                                    //trying to add text onto the GUI"
+   title.setForeground(new Color(150, 200, 181));             //color font
    title.setHorizontalTextPosition(JLabel.CENTER);
 
 
    Frame.add(shrinkPhoto);// adds the panel to the GUI to put the file folder.png onto the panel to make it smaller
    shrinkPhoto.add(folderPNG);// the photo folder.png is added on the panel as if the panel is its own GUI
-
+   shrinkPhoto.add(title);
 
    Frame.setVisible(true);                              //This just makes sure the GUI is visible
 
