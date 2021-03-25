@@ -47,6 +47,6 @@ public class MyFrame extends JFrame{
    folderPNG.setIconTextGap(-20);                              // this lowered the gap between the image of the folder and the text "File organizer"
 
    Frame.setVisible(true);    //This just makes sure the GUI is visible
-   Frame.setResizable(false); //makes sure you cant change the size of the GUI 
+   Frame.setResizable(false); //makes sure you cant change the size of the GUI
  }
 }
