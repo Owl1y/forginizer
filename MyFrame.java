@@ -12,7 +12,7 @@ import java.io.File;
 import javax.swing.*;
 
 
-public class MyFrame extends JFrame implements ActionListener{
+public class MyFrame extends JFrame{ // implements ActionListener{
 
   public void MyFrame(){
 
