@@ -10,9 +10,12 @@ import java.awt.Font;
 import java.awt.event.*;
 import java.io.File;
 import javax.swing.*;
+import javax.swing.JButton;
 
 
-public class MyFrame extends JFrame{ // implements ActionListener{
+public class MyFrame extends JFrame implements ActionListener{
+
+  public JButton button = new JButton("Select File"); //this should be the button that lets you click on the button to get the file selector GUI
 
   public void MyFrame(){
 
@@ -50,6 +53,11 @@ public class MyFrame extends JFrame{ // implements ActionListener{
    folderPNG.setForeground(new Color(150, 200, 181));             //color of the font {it was tile set font but im going to change it to folderPNG set font}
 
 
+   button.addActionListener(this); //this makes the button have a reaction
+   Frame.add(button);//adds the button to the frame
+   this.pack();// i have no idea what this does line of code does i just copied what the guy did in the video and it works
+   button.setBounds(350, 400, 100, 50);// (x cord, y cord, width, height) for the button
+
 
    Frame.add(shrinkPhoto);                                     // adds the panel to the GUI to put the file folder.png onto the panel to make it smaller
    shrinkPhoto.setLayout(null);                                //this is what let me put the folderPNG photo anywhere
@@ -59,8 +67,26 @@ public class MyFrame extends JFrame{ // implements ActionListener{
    folderPNG.setIconTextGap(-20);                              // this lowered the gap between the image of the folder and the text "File organizer"
 
 
+   button.addActionListener(this);//im like 85% sure this just listens to make sure when the button is pressed
+   //Frame.add(button);// adds the button onto the frame
+   button.setVisible(true);
 
    Frame.setVisible(true);    //This just makes sure the GUI is visible
    Frame.setResizable(false); //makes sure you cant change the size of the GUI
- }
+
+     }
+      @Override
+      public void actionPerformed(ActionEvent e){
+        if(e.getSource() == button){
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("/"));
+            //int response = fileChooser.showOpenDialog(null);//select file to open
+            int response = fileChooser.showSaveDialog(null);  //select file to save
+
+            if(response == JFileChooser.APPROVE_OPTION){
+                File file = new File(fileChooser.getSelectedFile().getAbsolutePath());//this saves the file and shows the path to the file >:)
+
+     }
+    }
+  }
 }
