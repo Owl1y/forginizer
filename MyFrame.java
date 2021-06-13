@@ -77,19 +77,19 @@ public class MyFrame extends JFrame implements ActionListener {
   public void actionPerformed(ActionEvent press) {
     if (press.getSource() == button) {
       JFileChooser fileChooser = new JFileChooser();
-      fileChooser.setCurrentDirectory(new File("/"));
+      fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES); 
+      fileChooser.setCurrentDirectory(new File("/home/a"));
       int response = fileChooser.showSaveDialog(null); // select file to save
-
+      
       if (response == JFileChooser.APPROVE_OPTION) {
         File directoryPath = new File(fileChooser.getSelectedFile().getAbsolutePath()); // this saves the file and shows  the path to the file >:)
-         //Creating a File object for directory
-       //File directoryPath = directoryPath; //hold onto this cause it could be saucy
-       //List of all files and directories
+       
+        //List of all files and directories
        File filesList[] = directoryPath.listFiles();
        for(File F: filesList){
         System.out.println(F);
        } 
-
+       // System.out.println("------------------");
        // File directoryPath = new File("D:\\ExampleDirectory");
         // List of all files and directories
 
