@@ -11,6 +11,11 @@ import java.awt.event.*;
 import java.io.File;
 import javax.swing.*;
 import javax.swing.JButton;
+import java.util.Arrays;
+import static java.nio.file.StandardCopyOption.*;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.*;
 
 public class MyFrame extends JFrame implements ActionListener {
 
@@ -77,23 +82,132 @@ public class MyFrame extends JFrame implements ActionListener {
   public void actionPerformed(ActionEvent press) {
     if (press.getSource() == button) {
       JFileChooser fileChooser = new JFileChooser();
-      fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES); 
+      // fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
       fileChooser.setCurrentDirectory(new File("/home/a"));
+      fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
       int response = fileChooser.showSaveDialog(null); // select file to save
-      
+
       if (response == JFileChooser.APPROVE_OPTION) {
-        File directoryPath = new File(fileChooser.getSelectedFile().getAbsolutePath()); // this saves the file and shows  the path to the file >:)
-       
-        //List of all files and directories
-       File filesList[] = directoryPath.listFiles();
-       for(File F: filesList){
-        System.out.println(F);
-       } 
-       // System.out.println("------------------");
-       // File directoryPath = new File("D:\\ExampleDirectory");
+        File directoryPath = new File(fileChooser.getSelectedFile().getAbsolutePath()); // this saves the file and shows
+                                                                                        // the path to the file >:)
+        String StringPath = directoryPath.toString();
+        Path parentOfFile = Paths.get(StringPath);  //this is to get the directory path to put the folders in the directory instead of like on like some random other folder
+        String stringyFile = parentOfFile.toString();
+
         // List of all files and directories
+        File filesList[] = directoryPath.listFiles();
+
+        File vidDir = new File(stringyFile + "/vidDir");
+        File photoDir = new File(stringyFile + "/photoDir");
+        File windowsDir = new File(stringyFile + "/windowsDir");
+        File archivedDir = new File(stringyFile + "/archivedDir");
+        File docsDir = new File(stringyFile + "/docsDir");
+
+        for (File file : filesList) {
+          // convert file name into string
+          String fileName = file.toString();
+
+          int index = fileName.lastIndexOf('.');
+          if (index > 0) {
+            String extension = fileName.substring(index + 1);
+            System.out.println(fileName + "\t" + extension);
+           // System.out.println(fileName);
+            //Path src = Paths.get(fileName);
+
+
+            if (extension.equals("dll") || extension.equals("exe") || extension.equals("msi")) {
+             if (!windowsDir.exists()) {
+                  windowsDir.mkdirs();
+                 System.out.println("THIS SHOULD NOT RUN AT ALL SINCE THE WINDOWS DIR HAS ALREADY BEEN CREATED I JUST NEED MY FILES TO GO INTO HERE");
+              } else {
+                try {
+                  //Path target = Paths.get(windowsDir.getPath());
+                  //Files.move(src, target, REPLACE_EXISTING);
+                 // boolean success = file.renameTo(new File(windowsDir + "/" + file));
+                 File a = new File(fileName);
+                 a.renameTo(new File(windowsDir + "/new" + a.getName()));
+                 a.delete();
+
+                  System.out.println("the file was moved bro to the other file and it should be good now!");
+                } catch (Exception ex) {
+                  System.out.println("===TARGET FILE ALREADY EXISTS===");
+                }
+              }
+            }
+
+            if (extension.equals("jpg") || extension.equals("png")) {
+             if (!photoDir.exists()) {
+                  photoDir.mkdirs();
+                 System.out.println("THIS SHOULD NOT RUN AT ALL SINCE THE PHOTO DIR HAS ALREADY BEEN CREATED I JUST NEED MY FILES TO GO INTO HERE");
+              } else {
+                try {
+                  File b = new File(fileName);
+                  b.renameTo(new File(photoDir + "/new" + b.getName()));
+                  b.delete();
+                  System.out.println("the file was moved bro to the other file and it should be good now!");
+                } catch (Exception ex) {
+                  System.out.println("===TARGET FILE ALREADY EXISTS===");
+                }
+              }
+            }
+
+            if (extension.equals("webm") || extension.equals("mp4") || extension.equals("mkv")) {
+             if (!vidDir.exists()) {
+                  vidDir.mkdirs();
+                 System.out.println("THIS SHOULD NOT RUN AT ALL SINCE THE WINDOWS DIR HAS ALREADY BEEN CREATED I JUST NEED MY FILES TO GO INTO HERE");
+              } else {
+                try {
+                 File c = new File(fileName);
+                 c.renameTo(new File(vidDir + "/new" + c.getName()));
+                 c.delete();
+                  System.out.println("the file was moved bro to the other file and it should be good now!");
+                } catch (Exception ex) {
+                  System.out.println("===TARGET FILE ALREADY EXISTS===");
+                }
+              }
+            }
+
+            if (extension.equals("zip") || extension.equals("rar") || extension.equals("7z") || extension.equals("tar")) {
+             if (!archivedDir.exists()) {
+                  archivedDir.mkdirs();
+                 System.out.println("THIS SHOULD NOT RUN AT ALL SINCE THE WINDOWS DIR HAS ALREADY BEEN CREATED I JUST NEED MY FILES TO GO INTO HERE");
+              } else {
+                try {
+                 File d = new File(fileName);
+                 d.renameTo(new File(archivedDir + "/new" + d.getName()));
+                 d.delete();
+                  System.out.println("the file was moved bro to the other file and it should be good now!");
+                } catch (Exception ex) {
+                  System.out.println("===TARGET FILE ALREADY EXISTS===");
+                }
+              }
+            }
+
+            if (extension.equals("docx") || extension.equals("pdf") || extension.equals("djvu")) {
+             if (!docsDir.exists()) {
+                  docsDir.mkdirs();
+                 System.out.println("THIS SHOULD NOT RUN AT ALL SINCE THE WINDOWS DIR HAS ALREADY BEEN CREATED I JUST NEED MY FILES TO GO INTO HERE");
+              } else {
+                try {
+                 File e = new File(fileName);
+                 e.renameTo(new File(docsDir + "/new" + e.getName()));
+                 e.delete();
+                  System.out.println("the file was moved bro to the other file and it should be good now!");
+                } catch (Exception ex) {
+                  System.out.println("===TARGET FILE ALREADY EXISTS===");
+                }
+              }
+            }
+
+          }
+
+        }
+
+        System.out.println("----------------------------- " + filesList.length);
 
       }
     }
   }
+
 }
