@@ -84,7 +84,7 @@ public class MyFrame extends JFrame implements ActionListener {
       JFileChooser fileChooser = new JFileChooser();
       // fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-      fileChooser.setCurrentDirectory(new File("/home/a"));
+      fileChooser.setCurrentDirectory(new File("~"));
       fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
       int response = fileChooser.showSaveDialog(null); // select file to save
 
